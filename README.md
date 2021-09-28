@@ -1,6 +1,7 @@
 # Change Log
 ## 28/09/21
 Visuals for yesterday's main changes:
+
 ![Screenshot (69)](https://user-images.githubusercontent.com/44437464/135065419-dd358c9f-57d1-43e8-877d-93fda434aab7.png)
 *Water shader graph (using Brackeys tutorial)*
 
@@ -8,6 +9,7 @@ Visuals for yesterday's main changes:
 *Outline shader graph*
 
 ![Screenshot (70)](https://user-images.githubusercontent.com/44437464/135065442-07b9f3df-2608-4f84-9c3f-5ab4b5a765b7.png)
+
 *Outline shader graph applied to duck model*
 
 The error behind the outline shader was also found yesterday evening: the value assigned to the OutlineThickness was too great when used in conjunction with more complex objects that had more vertices. This issue was solved by decreasing it to the lowest positive value, giving off a slight black edge with no extreme visible errors.
@@ -15,7 +17,9 @@ The error behind the outline shader was also found yesterday evening: the value 
 
 ## 27/09/21
 The duck now has a body!
+
 ![Screenshot (68)](https://user-images.githubusercontent.com/44437464/134911654-02299880-c8d7-4e4c-9534-2a370d5287dc.png)
+
 In the initial projection for this month I set myself the goal of simply nailing down the basic movement and thinking through the ideas for the core mechanics. However, I soon grew tiresome of staring at cubes following me around for ages on end, and as such I was able to throw this together.
 
 In doing so I also thought about the art direction for the game. The theme of the game lends itself to a naturally whimsical art style, so after much deliberation I decided to ~~go down the same route as most indie devs and~~ try some low-poly modelling out. I opened Blender and tried my hand at it, eventually coming up with this. All I needed to do was import the .fbx file into Unity, create a prefab with the model, then set up a couple of colliders and boom! All sorted!
