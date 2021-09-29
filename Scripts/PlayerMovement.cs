@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
     public CharacterController player;
     public float speed;
+    float health = 500f;
+    float maxHealth = 500f;
+    float regenDelay = 5f;
+    float regenRate = 0.2f;
+    float regenDelayPassed = 5f;
+    public Slider healthBar;
 
     float gravity = -19.6f;
     public Transform groundCheck;
@@ -44,5 +51,35 @@ public class PlayerMovement : MonoBehaviour
         Vector3 playerMove = transform.right * x + transform.forward * z;       //Gets WASD/arrow key inputs and translates to player movement
         player.Move(playerMove * speed * Time.deltaTime);
         player.Move(Vector3.up * yVel * Time.deltaTime);        //Applies horizontal and vertical movement separately to avoid bugs in movement
+        
+        ManageHealth();
+        healthBar.value = health;       //Sets slider scale to equal health value
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            health -= 10f;      //Test for health system
+            regenDelayPassed = 0f;
+        }
+    }
+    
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "FoeAttack")
+        {
+            health -= 10f;
+            regenDelayPassed = 0f;      //Decrements health and resets delay passed when hit by enemy projectile
+        }
+    }
+
+    void ManageHealth()
+    {
+        if (regenDelayPassed >= regenDelay && health < maxHealth)
+        {
+            health += regenRate;        //Slowly regenerates player health if not hit by enemy for 5 seconds
+        }
+        else if (regenDelayPassed < regenDelay)
+        {
+            regenDelayPassed += Time.deltaTime;     //Increases value of regenDelayPassed
+        }
     }
 }
