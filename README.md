@@ -1,4 +1,32 @@
 # Change Log
+## 30/09/21
+Well, that didn't take as long as I thought it would. After a couple of days messing around with the code, fixing errors, and adding other little changes, the player is no longer safe - the ducks can attack!
+
+Today's commit has added a couple of new scripts that streamlined the process of attacking for both player and duck alike. Rather than devoting an entire script to all the movements and functions that the ducks can carry out, I created a new script to manage attacks and attached it to the duck prefab that I have created for my project. Each duck now calculates how far it is from the player and how long it has been since it last attacked. If both conditions are met (the duck is close to the player and has not attacked for a couple of seconds) then the DuckMovement script calls an attack function from the attached ShootPlayer script. All this does is spawn in a bullet prefab which will hurtle in the direction that the duck was looking in for a few seconds before either hitting the player and destroying itself or living out its short lifespan before being deleted from the scene.
+
+![Screenshot (73)](https://user-images.githubusercontent.com/44437464/135453677-80454022-469f-4274-bb14-2f53b415f47a.png)
+*Code for instantiating the bullet prefab*
+
+![Screenshot (74)](https://user-images.githubusercontent.com/44437464/135453757-08049612-19e3-4c8a-bec5-c68d2d35d30e.png)
+*Bullet behaviour script*
+
+However, I soon ran into a problem. Despite all of the code looking exactly as it should and the tags set correctly, the player wasn't taking any damage. Even when I mocked up a health bar and added some UI interaction into the script, the health didn't drop at all. Would if be safe to check that I can be damaged at all? To be sure I added a function for testing wherein the player could press the Control key to damage themselves, and sure enough, it worked just fine. So what was the issue?
+
+Well, it turns out that I made an error on my OnTriggerEnter function, having it set as 2D rather than 3D. Guess it just goes to show that even when you're feeling certain that it should all work smoothly, you can still gloss over the smaller bits of code! With that sorted, everything worked just as intended, with the player being damaged by the bullets and regenerating health after not being hit for a few seconds.
+
+I have also made a key change to the way that the player shoots the ducks. While I did find that being able to see the projectile was quite fun at first, the delight wore off rather quickly. Fortunately this is where I realised I could use a raycast to fire the gun instead. So I removed the old scripts that dealt with having the player fire a bullet and added a new one which retained some properties of the old script - namely, there is still a slight delay between bullets fired. So what I should say is that they retained one property, but hey ho, it feels smoother and it even gave me an excuse to run around the tiny box of a test level in a mad panic before the ducks could kill me.
+
+One last thing I want to talk about is a more detailed log of my progress. From here on in I am going to try and restrict this page to scripting progress only, with a more detailed log either on YouTube or my portfolio. A link will appear here when it finally does go up, but for now I'm afraid you shall just have to wait.
+
+###### TL;DR:
+ - Added health system for player
+ - Implemented scripts for duck ranged attacks
+ - Mocked up initial UI element for player health
+ - Fixed bugs in scripts
+ - Detailed log is currently in progress
+ - Player attack system changed to raycasts
+
+
 ## 28/09/21
 Visuals for yesterday's main changes:
 
