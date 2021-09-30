@@ -54,20 +54,14 @@ public class PlayerMovement : MonoBehaviour
         
         ManageHealth();
         healthBar.value = health;       //Sets slider scale to equal health value
-
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            health -= 10f;      //Test for health system
-            regenDelayPassed = 0f;
-        }
     }
     
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (collision.tag == "FoeAttack")
+        if (other.tag == "Bullet")
         {
-            health -= 10f;
-            regenDelayPassed = 0f;      //Decrements health and resets delay passed when hit by enemy projectile
+            health -= 30f;
+            regenDelayPassed = 0f;      //Decrements health and resets delay when hit by enemy projectile
         }
     }
 
