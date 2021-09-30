@@ -6,6 +6,9 @@ public class DuckMovement : MonoBehaviour
 {
     public GameObject player;
     float health = 100f;
+    float attackDelay = 3f;
+    float lastAttack = 0f;
+    public ShootPlayer attackPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -27,18 +30,30 @@ public class DuckMovement : MonoBehaviour
         {
             transform.Translate(0f, 0f, 0.02f);     //Duck moves towards player if hypotenuse length is great enough
         }
+        
+        ManageAttacks(hypotenuse);
     }
 
-    void OnTriggerEnter(Collider other)
+    void ManageAttacks(float playerDistance)
     {
-        if (other.tag == "Bullet")
+        if (lastAttack <= attackDelay)
         {
-            health -= 10f;
-            Debug.Log("Current health: " + health);     //Decrements health by 10 if hit by bullet
-            if (health <= 0f)
-            {
-                Destroy(gameObject);        //Destroys duck once health hits 0
-            }
+            lastAttack += Time.deltaTime;       //Adds time passed to value
+        }
+
+        if (lastAttack >= attackDelay && playerDistance < 15f)
+        {
+            attackPlayer.Attack();          //Calls attack function in other script and resets delay
+            lastAttack = 0f;
+        }
+    }
+
+    public void Shot(float damageTaken)
+    {
+        health -= damageTaken;
+        if (health == 0f)
+        {
+            Destroy(gameObject);        //Destroys duck once it hits 0 health
         }
     }
 }
