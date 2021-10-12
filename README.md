@@ -1,4 +1,18 @@
 # Change Log
+## 12/10/21
+I've dubbed the past couple of weeks the infestation, because OH GOODNESS THERE ARE BUGS EVERYWHERE!
+
+Going into my next stage of development, I thought that a respawn system would be fairly simple to mock up. In theory it really shouldn't: add a function to the script that gets called when the player's health hits anywhere from 0 downwards and reset their position and rotation to that of a spawn point. This proved incredibly easy to do by adding a new GameObject to the scene, adding it to the PlayerMovement script under the guise of a Transform variable, then simply adding in the appropriately-named PlayerRespawn() function and calling it from Update() the moment that the player hits zero health. Perfect.
+
+The trouble came with other considerations, namely making it so that the player would be immune to any duck attacks for a short period after respawning or deactivating the ducks until the player has survived for a couple of seconds after being reborn. For some unknown reason, trying either one of them has forced my project to crash numerous times, the most recent one preventing me from opening the file at all.
+
+Well this sucks, eh?
+
+It also leaves me with a few options. If I can sort out the issue and reopen the project, I will be able to continue working on my project. Otherwise I may have to either start from scratch or abandon the project. Hopefully it won't come to that but in the event that nothing works then it's the only thing I can really do.
+
+So in conclusion, these bugs have been a bit of a bummer, but if I can figure out what's causing them then I should be able to get back on track to make some more progress on it!
+
+
 ## 30/09/21
 Well, that didn't take as long as I thought it would. After a couple of days messing around with the code, fixing errors, and adding other little changes, the player is no longer safe - the ducks can attack!
 
