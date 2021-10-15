@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SpawnDucks : MonoBehaviour
 {
     public DuckMovement duckPrefab;
     float waitTime = 0f;
+    public Slider playerHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +18,10 @@ public class SpawnDucks : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        waitTime += Time.deltaTime;     //Counts time between ducks spawning
+        if (playerHealth.value != 0f)
+        {
+            waitTime += Time.deltaTime;     //Counts time between ducks spawning as long as player is not dead
+        }
 
         if (waitTime >= 5f)
         {
