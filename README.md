@@ -1,4 +1,22 @@
 # Change Log
+## 15/10/21
+Thanks to some debugging and lots of testing over the course of the past couple of days, I was able to figure out what the issue was: a very persistent WHILE loop that would crash the Unity project and prevent me from opening it again due to the iterations it had been carrying out.
+
+Fortunately I was able to hop back into it after rebooting my laptop a couple of times and replacing the WHILE loop with an IF statement that functioned similarly to how the previous loop functioned; despite this, there were still a couple of issues that I was able to identify by checking to see whether or not the console was printing certain commands. For starters, when I wrote a debug line to output the health bar value upon the player's death, I discovered that it would not actually dip into 0 or below even if the player's health did, which was quite vital because it was the method I had chosen for the ducks to be able to see what health the player was on. This wasn't that hard to fix, as I could simply manually change the value of the health bar if the attack would have taken the player to sub-zero digits.
+
+This led onto another issue - the ducks were not registering when the player health dipped to 0 or below, resulting in a neverending stream of ducks bombarding the player. I chose to circumnavigate this by adding in a delay when the player dies, which enabled the DuckMovement script to read the change and output the appropriate message. I'm pretty sure that this may have been due to the speed at which Unity reads certain functions, with the OnTriggerEnter function being read separately to the regular Update each script has and therefore refilling the player's health before the ducks could identify that there had been a change.
+
+So, huzzah! All-in-all I would say that I am fairly content with the main changes this week. A number of other tweaks have been made to the scripts, namely in terms of tidying them up (par example, moving the actual player movement into its own function rather than keeping it in Update) and I am also making a point of going through and adding comments to scripts so that I don't confuse myself or others who end up looking at them.
+
+With this sorted, my attention is moving more into the realms of how to spice up the core gameplay. While there can be some fun in just running around and shooting at rubber ducks, it will get boring fairly quickly, so I have starting brainstorming several power-ups that can benefit the player while offering new ways of committing rubber duck slaughter. On the other side of things, there are also a couple of duck variants that I have been working on, and if all goes well then they should be ready to show off sometime within the next month or so!
+
+###### TL;DR:
+ - Basic player respawn system implemented
+ - Added delay to ducks when player respawns
+ - Tidied up various scripts
+ - Beginning to look at power-ups and new enemies
+
+
 ## 12/10/21
 I've dubbed the past couple of weeks the infestation, because OH GOODNESS THERE ARE BUGS EVERYWHERE!
 
