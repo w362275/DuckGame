@@ -1,4 +1,10 @@
 # Change Log
+## 30/10/21
+ - Adding raycasts to prevent ducks shooting through other ducks
+ - Iterating different duck variations
+ - Shader experimentation
+
+
 ## 15/10/21
 Thanks to some debugging and lots of testing over the course of the past couple of days, I was able to figure out what the issue was: a very persistent WHILE loop that would crash the Unity project and prevent me from opening it again due to the iterations it had been carrying out.
 
